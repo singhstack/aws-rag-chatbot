@@ -1,2 +1,8 @@
 boto3
 awscli
+streamlit
+langchain
+langchain_community
+numpy
+pandas
+faiss-cpu
