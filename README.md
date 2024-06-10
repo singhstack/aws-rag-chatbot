@@ -1,1 +1,1 @@
-# AWS-Bedrock
+# RAG Chatbot using AWS Bedrock
