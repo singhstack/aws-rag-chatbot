@@ -1,6 +1,8 @@
 import json
 import os
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
+os.environ['data_folder']="data"
+#where is my paystub?
 #to avoid - Error #15: Initializing libomp.dylib, but found libiomp5.dylib already initialized.
 import sys
 import boto3
@@ -68,7 +70,7 @@ def get_response_llm(llm,vectorstore_faiss,query):
     ),
     return_source_documents=True,
     chain_type_kwargs={"prompt": PROMPT}
-)
+    )
     answer=qa.invoke({"query":query})
     return answer['result']
 
@@ -77,13 +79,13 @@ def main():
     st.set_page_config("Chat PDF")
     st.header("Chat with PDF using AWS Bedrock💁")
     user_question = st.text_input("Ask a Question from the PDF Files")
-
+    data_folder = "data"
     with st.sidebar:
         st.title("Update Or Create Vector Store:")
         
         if st.button("Vectors Update"):
             with st.spinner("Processing..."):
-                docs = data_ingestion()
+                docs = data_ingestion(data_folder)
                 get_vector_store(docs)
                 st.success("Done")
 
